@@ -6,8 +6,18 @@
     </head>
     <body>
         <h1>index.html should contain script with type coercion operations​</h1>
-        <script
-            s
+
+        <script>
+            console.log("'' + 1 = ", '' + 1);
+            console.log("1 + '' = ", 1 + '');
+            console.log("true + ' 1' = ", true + ' 1');
+            console.log("'1 ' + false = ", '1 ' + false);
+            console.log("null + 1 = ", null + 1);
+            console.log("undefined + null = ", undefined + null);
+            console.log("[] + 'abc' = ", [] + 'abc');
+            console.log("[a,b,c] + 'abc' = ", [a,b,c] + 'abc');
+            console.log("{} + true = ", {} + true);
+            console.log("[5] - 1 = ", [5] - 1 );
         </script>
     </body>
 </html>
