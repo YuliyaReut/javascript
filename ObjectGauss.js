@@ -6,31 +6,48 @@ function randn_bm() {
         v = Math.random();
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v) * 2 | 0;
 }
-let rundomNumb;
-let str = '\n';
 
-//WAY 1 - obj
-let obj = {};
-
-for (let i = 0; i < 10; i++) {
-    rundomNumb = randn_bm();
-    obj[rundomNumb] ? obj[rundomNumb]++ : obj[rundomNumb] = 1;
+function displayStrLikeTable(entries) {
+    let str = '\n';
+    for (const [key, value] of entries) {
+        str += `${key} : ${value} \n`;
+    }
+    console.log(str);
 }
 
-for (const [key, value] of Object.entries(obj)) {
-    str += `${key} : ${value} \n`
-}
-console.log('obj - ', str);
+function createObjectGauss(n) {
+    let randomNumb;
+    let obj = {};
 
-//WAY 2 - map
-let map = new Map();
+    [...Array(n)].forEach(() => {
+        randomNumb = randn_bm();
+        if (obj[randomNumb]) {
+            obj[randomNumb]++;
+        } else {
+            obj[randomNumb] = 1;
+        }
+    });
 
-for (let i = 0; i < 10; i++) {
-    rundomNumb = randn_bm();
-    map.set(rundomNumb, map.get(rundomNumb) ? map.get(rundomNumb) + 1 : 1);
+    displayStrLikeTable(Object.entries(obj));
 }
-str = '\n';
-for (const [key, value] of map.entries()) {
-    str += `${key} : ${value} \n`
+
+function createMapGauss(n) {
+    let randomNumb;
+    let map = new Map();
+
+    [...Array(n)].forEach(() => {
+        randomNumb = randn_bm();
+        if (map.get(randomNumb)) {
+            map.set(randomNumb, map.get(randomNumb) + 1);
+        } else {
+            map.set(randomNumb, 1);
+        }
+    });
+
+    displayStrLikeTable(map);
 }
-console.log('map - ', str);
+
+createObjectGauss(10);
+createMapGauss(10);
+
+
