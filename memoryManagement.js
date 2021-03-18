@@ -7,7 +7,7 @@ function calculateFalsyNFactorial(n) {
 }
 //  Solve
 //  Recursion has 2 cases: base (for output) and recursion (for calling itself)
-//  Base case applys to avoid stack overflow 
+//  Base case applies to avoid stack overflow 
 function calculateTruthyNFactorial(n) {
     if (n == 1) {
         return 1;   //<-- base case (always first)
