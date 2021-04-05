@@ -26,14 +26,9 @@ class Stuff extends Entity {
 }
 
 class Box extends Entity {
-    constructor(name, stuffs) {
+    constructor(name) {
         super(name);
-        if (Stuff.isStuff(stuffs)) {
-            this.stuffs = [stuffs];
-        } else
-            if (!stuffs.find(stuff => !Stuff.isStuff(stuff))) {
-                this.stuffs = stuffs;
-            }
+        this.stuffs = [];
     }
     static isBox(box) {
         return Box.prototype.isPrototypeOf(box);
@@ -51,20 +46,15 @@ class Box extends Entity {
         }
     }
 
-    removeStuff(stuff) {
-        this.stuffs.splice(this.stuffs.indexOf(stuff), 1);
+    removeStuff(index) {
+        this.stuffs.splice(index, 1);
     }
 }
 
 class User extends Entity {
     constructor(name, boxes) {
         super(name);
-        if (Box.isBox(boxes)) {
-            this.boxes = [boxes];
-        } else
-            if (!boxes.find(box => !Box.isBox(box))) {
-                this.boxes = boxes;
-            }
+        this.boxes = [];
     }
 
     printName() { // polymorphism -> overriding a method with a call to the parent method
@@ -80,8 +70,8 @@ class User extends Entity {
         }
     }
 
-    removeBox(box) {
-        this.boxes.splice(this.boxes.indexOf(box), 1);
+    removeBox(index) {
+        this.boxes.splice(index, 1);
     }
 
     getAllBoxesNames() {
@@ -97,18 +87,24 @@ class User extends Entity {
     }
 }
 
-let flowers = [fl1 = new Stuff('Rose'), fl2 = new Stuff('Gerbera'), fl3 = new Stuff('Chamomile')];
-let basket = new Box('Basket with flowers', flowers);
-let person = new User('Mary', basket);
+let basket = new Box('Basket with flowers');
+basket.addStuff(new Stuff('Rose'));
+basket.addStuff(new Stuff('Gerbera'));
+basket.addStuff(new Stuff('Chamomile'));
+let person = new User('Mary');
+person.addBox(basket);
 
-basket.removeStuff(fl2);
+basket.removeStuff(2);
+
 let lily = new Stuff('Lily');
 basket.addStuff(lily);
 
 person.displayInfo();
 
-let books = [book1 = new Stuff('novel Three Comrades'), book2 = new Stuff(' story Animal Farm'), book3 = new Stuff('dystopia 1984')];
-let box = new Box('Box with books', books);
+let box = new Box('Box with books');
+box.addStuff(new Stuff('novel Three Comrades'));
+box.addStuff(new Stuff(' story Animal Farm'));
+box.addStuff(new Stuff('dystopia 1984'));
 
 box.addStuff(123); // example with incorrect input data
 person.addBox(box);
