@@ -52,7 +52,7 @@ class Box extends Entity {
 }
 
 class User extends Entity {
-    constructor(name, boxes) {
+    constructor(name) {
         super(name);
         this.boxes = [];
     }
